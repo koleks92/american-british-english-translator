@@ -54,11 +54,17 @@ class Translator {
             }
         };
 
-        newArray[0] = capitalizeWord(newArray[0])
+        newArray[0] = capitalizeWord(newArray[0]);
 
-        const newString = newArray.join(" ");
+        let newString = newArray.join(" ");
+
+        if ([".", "?", "!"].includes(newString[newString.length - 1])) {
+            return newString;
+        } else {
+            newString = newString + ".";
+            return newString
+        }
         
-        return newString;
             
 
     };
@@ -93,9 +99,14 @@ class Translator {
 
         newArray[0] = capitalizeWord(newArray[0])
 
-        const newString = newArray.join(" ");
-        
-        return newString;
+        let newString = newArray.join(" ");
+
+        if ([".", "?", "!"].includes(newString[newString.length - 1])) {
+            return newString;
+        } else {
+            newString = newString + ".";
+            return newString
+        }
     }
 }
 
