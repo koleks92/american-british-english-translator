@@ -3,7 +3,7 @@ const americanToBritishSpelling = require('./american-to-british-spelling.js');
 const americanToBritishTitles = require("./american-to-british-titles.js")
 const britishOnly = require('./british-only.js')
 
-
+// Reverse dictionary
 function reverseDict(dictionary) {
     const reversedDict = {};
 
@@ -14,6 +14,7 @@ function reverseDict(dictionary) {
     return reversedDict;  // Return the reversed dictionary after the loop completes
 };
 
+// Capitalize first letter
 function capitalize(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
@@ -22,6 +23,7 @@ class Translator {
     // American to British translation
     a2b(text) {
 
+        
         Object.keys(americanOnly).forEach(key => {
             const regex = new RegExp(`\\b${key}\\b`, 'gi'); // word boundary to match full words only
             text = text.replace(regex, `<span class="highlight">${americanOnly[key]}</span>`);
