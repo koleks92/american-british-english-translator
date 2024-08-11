@@ -18,39 +18,28 @@ function capitalize(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
 
-class Translator {
-    // Split text into array
-    splitToArray(text) {
-
-        const stringLowered = text.toLowerCase();
-        
-        const stringsArray = stringLowered.split(" ");        
-        
-        return stringsArray;
-        
-    };
-    
+class Translator {   
     // American to British translation
     a2b(text) {
 
         Object.keys(americanOnly).forEach(key => {
             const regex = new RegExp(`\\b${key}\\b`, 'gi'); // word boundary to match full words only
-            text = text.replace(regex, americanOnly[key]);
+            text = text.replace(regex, `<span class="highlight">${americanOnly[key]}</span>`);
         });
     
         Object.keys(americanToBritishSpelling).forEach(key => {
             const regex = new RegExp(`\\b${key}\\b`, 'gi');
-            text = text.replace(regex, americanToBritishSpelling[key]);
+            text = text.replace(regex, `<span class="highlight">${americanToBritishSpelling[key]}</span>`);
         });
     
         Object.keys(americanToBritishTitles).forEach(key => {
             // Create a regex to match the title with punctuation or end of string
             const regex = new RegExp(key, 'gi');
-            text = text.replace(regex, capitalize(americanToBritishTitles[key]));
+            text = text.replace(regex, `<span class="highlight">${capitalize(americanToBritishTitles[key])}</span>`);
           });
 
         // Time
-        text = text.replace(/(\d+):(\d+)/g, '$1.$2');
+        text = text.replace(/(\d+):(\d+)/g, `<span class="highlight">$1.$2</span>`);
 
         return text
     }
@@ -66,21 +55,21 @@ class Translator {
 
         Object.keys(britishOnly).forEach(key => {
             const regex = new RegExp(`\\b${key}\\b`, 'gi'); // word boundary to match full words only
-            text = text.replace(regex, britishOnly[key]);
+            text = text.replace(regex, `<span class="highlight">${britishOnly[key]}</span>`);
         });
     
         Object.keys(britishToAmericanSpelling).forEach(key => {
             const regex = new RegExp(`\\b${key}\\b`, 'gi');
-            text = text.replace(regex, britishToAmericanSpelling[key]);
+            text = text.replace(regex, `<span class="highlight">${britishToAmericanSpelling[key]}</span>`);
         });
     
         Object.keys(britishToAmericanTitles).forEach(key => {
             const regex = new RegExp(`\\b${key}\\b`, 'gi');
-            text = text.replace(regex, capitalize(britishToAmericanTitles[key]));
+            text = text.replace(regex, `<span class="highlight">${capitalize(britishToAmericanTitles[key])}</span>`);
         });
 
         // Time
-        text = text.replace(/(\d+).(\d+)/g, '$1:$2');
+        text = text.replace(/(\d+).(\d+)/g, `<span class="highlight">$1:$2</span>`);
 
         return text
     }
